@@ -14,8 +14,8 @@ func RegisterRoutes(e *core.ServeEvent) error {
 	v1.GET("/hello", controller.HelloWorldController)
 	v1.POST("/post", controller.PostController).Bind(apis.RequireAuth()) // Auth middleware
 
-	paymentGroup := v1.Group("/payment")
-	paymentGroup.POST("/create", controller.CreatePaymentOrder).Bind(apis.RequireAuth())
+	paymentGroup := v1.Group("/payment").Bind(apis.RequireAuth())
+	paymentGroup.POST("/create", controller.CreatePaymentOrder)
 
 	return e.Next()
 }
